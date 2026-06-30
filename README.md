@@ -21,7 +21,7 @@ source application. This skill turns those lessons into a repeatable workflow.
 - Hardware status, fail-closed controls, and simulator/real-hardware boundaries
 - Packaged EXE verification with hashes, timestamps, and runtime screenshots
 
-See [SKILLS.md](SKILLS.md) for the visible skill entry point.
+See [skills.md](skills.md) for the visible skill entry point.
 
 ## Install
 
