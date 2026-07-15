@@ -7,7 +7,7 @@
 Install with:
 
 ```bash
-npx skills add k-telux/labview-to-python-industrial-skill \
+npx skills add k-telux/labview-to-python \
   --skill labview-to-python-industrial
 ```
 

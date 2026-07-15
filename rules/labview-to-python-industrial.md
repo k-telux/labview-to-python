@@ -1,6 +1,6 @@
 # LabVIEW To Python Industrial Rule
 
-Rule version: 2.0.0
+Rule version: 2.1.0
 
 This is a derived standalone policy excerpt for rule-based agents. The canonical
 operational source is `skills/labview-to-python-industrial/SKILL.md`; if wording
