@@ -3,6 +3,20 @@
 All notable changes follow [Keep a Changelog](https://keepachangelog.com/) and
 [Semantic Versioning](https://semver.org/).
 
+## [2.1.0] - 2026-07-15
+
+### Added
+
+- sanitized completion-state screenshots for pump-probe and spectroscopy/TCSPC migrations;
+- visual showcase with explicit proof and non-proof boundaries.
+
+### Changed
+
+- rebuilt English, Simplified Chinese, and Japanese repository entry pages around
+  real results, quick-start prompts, advantages, gate tables, and case navigation;
+- moved localized README files to the repository root for immediate discovery;
+- extended repository validation to require and inspect public showcase assets.
+
 ## [2.0.0] - 2026-07-15
 
 ### Added

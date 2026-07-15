@@ -21,9 +21,12 @@ def main() -> int:
         ROOT / "skills" / "labview-to-python-industrial" / "LICENSE.txt",
         ROOT / "skills" / "labview-to-python-industrial" / "agents" / "openai.yaml",
         ROOT / "rules" / "labview-to-python-industrial.md",
-        ROOT / "docs" / "README.zh-CN.md",
-        ROOT / "docs" / "README.ja-JP.md",
+        ROOT / "README.zh-CN.md",
+        ROOT / "README.ja.md",
         ROOT / "examples" / "README.md",
+        ROOT / "examples" / "showcase" / "README.md",
+        ROOT / "examples" / "showcase" / "assets" / "pump-probe-industrial-ui.png",
+        ROOT / "examples" / "showcase" / "assets" / "spectroscopy-tcspc-ui.png",
     ]
     for path in required:
         check(path.is_file(), f"missing required file: {path.relative_to(ROOT)}", errors)
@@ -77,6 +80,22 @@ def main() -> int:
     for path in ROOT.rglob("*.md"):
         content = path.read_text(encoding="utf-8")
         check("C:\\Users\\" not in content, f"private Windows path in {path.relative_to(ROOT)}", errors)
+        for target in re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", content):
+            if target.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            relative = target.split("#", 1)[0]
+            if relative:
+                check((path.parent / relative).exists(), f"broken link in {path.relative_to(ROOT)}: {target}", errors)
+
+    for name in ["pump-probe-industrial-ui.png", "spectroscopy-tcspc-ui.png"]:
+        path = ROOT / "examples" / "showcase" / "assets" / name
+        if path.is_file():
+            payload = path.read_bytes()
+            check(payload[:8] == b"\x89PNG\r\n\x1a\n", f"invalid PNG: {name}", errors)
+            width = int.from_bytes(payload[16:20], "big")
+            height = int.from_bytes(payload[20:24], "big")
+            check(width >= 1200 and height >= 700, f"showcase image is too small: {name} ({width}x{height})", errors)
+            check(path.stat().st_size < 1_000_000, f"showcase image is too large: {name}", errors)
 
     if errors:
         print("validation failed:")
