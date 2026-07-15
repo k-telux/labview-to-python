@@ -1,6 +1,0 @@
-interface:
-  display_name: "LabVIEW to Python Industrial"
-  short_description: "Industrial LabVIEW to Python migration workflow"
-  default_prompt: "Use $labview-to-python-industrial to plan and verify a LabVIEW VI migration into a Python measurement app."
-policy:
-  allow_implicit_invocation: true
