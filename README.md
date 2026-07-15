@@ -1,6 +1,6 @@
 <div align="center">
 
-# LabVIEW to Python Industrial
+# From LabVIEW to Python
 
 **Replace LabVIEW measurement applications with auditable Python software.**
 
