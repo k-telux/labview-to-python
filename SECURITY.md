@@ -1,17 +1,12 @@
 # Security Policy
 
-## Supported Versions
+Use GitHub's private vulnerability report button when it is enabled. If it is not
+available, open a minimal issue requesting private maintainer contact without
+including the vulnerability. Do not publish credentials, unsafe hardware steps,
+path traversal, arbitrary process termination, or untrusted packaging details.
 
-The current main branch is supported.
+This project contains instructions, not vendor drivers. Never add secrets,
+licensed SDK files, private run data, or executable payloads to an issue or pull
+request. Real hardware actions must remain fail-closed and operator-approved.
 
-## Reporting A Vulnerability
-
-Open a private security advisory or contact the maintainer before publishing
-details. Do not include secrets, hardware credentials, private instrument
-addresses, or proprietary SDK files in issues.
-
-## Hardware Safety
-
-This skill is guidance, not a hardware interlock. Real instruments require
-operator approval, physical safety checks, limits, fail-closed shutdown paths,
-and local lab procedures.
+Supported version: the latest tagged release.

@@ -1,93 +1,152 @@
 # LabVIEW to Python Industrial Skill
 
-Reusable Codex skill for migrating laboratory and industrial LabVIEW measurement
-software into Python applications with hardware adapters, simulator parity,
-industrial UI review, screenshot validation, and EXE packaging gates.
+[![Validate](https://github.com/k-telux/labview-to-python-industrial-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/k-telux/labview-to-python-industrial-skill/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-2563eb)](https://agentskills.io)
 
-Author: telux
+An evidence-gated Agent Skill and reusable rule for replacing LabVIEW laboratory
+and industrial measurement applications with Python without losing experiment
+logic, data lineage, hardware safety, UI integrity, or packaged-runtime proof.
 
-## Why
+Author: **telux**
 
-LabVIEW-to-Python projects fail most often at the edges: hidden subVI behavior,
-hardware fail-safe paths, simulator claims being confused with real hardware,
-UI defects visible only in screenshots, and packaged EXEs that do not match the
-source application. This skill turns those lessons into a repeatable workflow.
+[简体中文](docs/README.zh-CN.md) | [日本語](docs/README.ja-JP.md) | English
+
+## Why This Exists
+
+LabVIEW migrations often appear complete while still executing hidden fixed scan
+axes, misreporting partial data, accepting simulated hover helpers as UI proof, or
+shipping an EXE that no longer matches the source. This project turns lessons
+from real pump-probe migrations into a portable workflow with explicit gates.
 
 ## What It Covers
 
-- LabVIEW VI and subVI behavior inventory
-- Python workflow, hardware adapter, simulator, UI, tests, and packaging layout
-- Industrial dark UI rules and screenshot-based QA
-- Hardware status, fail-closed controls, and simulator/real-hardware boundaries
-- Packaged EXE verification with hashes, timestamps, and runtime screenshots
-
-See [skills.md](skills.md) for the visible skill entry point.
+- VI/subVI behavior inventory and immutable resolved scan plans
+- one workflow shared by real adapters, simulators, and multiple UIs
+- SDK inventory, hardware call-order evidence, limits, and fail-closed cleanup
+- full-resolution data, saved-file, plot, and heatmap parity
+- industrial and LabVIEW-style UI design with real interaction screenshot QA
+- user-path performance diagnostics and verifier-induced slowdown detection
+- source-to-EXE lineage, root/dist hash identity, shortcuts, and runtime gates
+- multi-project supervision with hard ownership and phase boundaries
 
 ## Install
 
-Copy the skill folder into your Codex skills directory:
+### Skills CLI
+
+```bash
+npx skills add k-telux/labview-to-python-industrial-skill \
+  --skill labview-to-python-industrial
+```
+
+For Codex explicitly:
+
+```bash
+npx skills add k-telux/labview-to-python-industrial-skill \
+  --skill labview-to-python-industrial \
+  --agent codex
+```
+
+### Manual Codex Install
 
 ```powershell
-Copy-Item -Recurse -Force .\skill\labview-to-python-industrial $env:USERPROFILE\.codex\skills\
+Copy-Item -Recurse -Force `
+  .\skills\labview-to-python-industrial `
+  $env:USERPROFILE\.codex\skills\
 ```
 
-Restart Codex or reload skills if your client requires it.
+The skill is self-contained. If an agent also supports project rules, the
+[derived rule excerpt](rules/labview-to-python-industrial.md) may be copied into
+`AGENTS.md` or `.agents/rules/`; `SKILL.md` remains the operational source.
 
-## Usage
-
-Example prompt:
+## Use
 
 ```text
-Use $labview-to-python-industrial to convert this LabVIEW pump-probe VI into a
-Python app with simulator, hardware adapters, screenshot UI QA, and EXE delivery.
+Use $labview-to-python-industrial to migrate this LabVIEW measurement VI into a
+Python application. Preserve the real workflow, add a deterministic simulator,
+verify the source UI with real interactions, and package only after source gate
+approval.
 ```
 
-The skill can also trigger implicitly for requests mentioning LabVIEW to Python,
-VI migration, industrial measurement UI, hardware driver migration, simulator
-parity, or packaged EXE verification.
+The skill also triggers for LabVIEW-to-Python audits, industrial PySide/PyQt UI,
+hardware SDK migration, simulator parity, heatmap or performance regressions, and
+Windows EXE verification.
+
+## Gate Model
+
+```mermaid
+flowchart LR
+  A[VI inventory] --> B[Logic and data]
+  B --> C[Simulator]
+  C --> D[Source UI]
+  D --> E[Packaged EXE]
+  E --> F[Real hardware]
+```
+
+Each gate has independent evidence and status. Simulator or source success never
+upgrades packaged EXE or real hardware automatically.
 
 ## Repository Layout
 
 ```text
-skill/
-  labview-to-python-industrial/
-    SKILL.md
-    agents/openai.yaml
-    references/
-      workflow.md
-      ui-qa.md
-      hardware-packaging.md
+skills/labview-to-python-industrial/
+  SKILL.md
+  agents/openai.yaml
+  references/
+rules/
+examples/
+docs/
+scripts/validate_repo.py
 ```
 
-## Validation
+The English `SKILL.md` is the only operational source. The standalone rule and
+Chinese/Japanese files are derived human-facing summaries.
 
-Validate the skill with the OpenAI skill creator validator:
+## Real Input/Output Examples
+
+The [examples](examples/README.md) contain sanitized input/output pairs derived
+from three real project histories:
+
+- dual regular-map and power-dependent migration supervision;
+- performance, heatmap, and UI source-gate diagnosis;
+- clean packaged-EXE lineage and runtime verification.
+
+They preserve the original engineering decisions while removing personal paths,
+private binaries, and vendor-licensed material.
+
+## Validate
+
+```bash
+python scripts/validate_repo.py
+```
+
+Codex users can also run the official skill validator:
 
 ```powershell
-py $env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\skill\labview-to-python-industrial
+py $env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_validate.py `
+  .\skills\labview-to-python-industrial
 ```
 
-For real LabVIEW projects, a final claim should include:
+## Evidence Boundary
 
-- LabVIEW parity inventory
-- simulator run artifacts
-- source UI screenshots
-- packaged EXE screenshots
-- real hardware status as verified or unvalidated
+This repository provides a workflow and validation contract. It does not ship
+vendor SDKs, prove hardware compatibility, or replace instrument manuals,
+calibration, operator approval, or laboratory safety procedures.
 
-## Security
+## Contributing And Security
 
-This repository contains instructions only. It should not include secrets,
-driver license files, vendor credentials, or private lab paths. Real hardware
-actions should stay fail-closed until the operator explicitly approves the dry
-run.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for changes and [SECURITY.md](SECURITY.md)
+for responsible disclosure. Never commit credentials, licensed SDK binaries,
+private experiment data, or identifiable local paths in examples.
 
-## Credits
+## References
 
-The README structure follows common mature open-source patterns from GitHub's
-README guidance, Standard Readme, Best-README-Template, and the Agent Skills
-progressive disclosure model.
+The layout follows progressive-disclosure and distribution patterns used by
+[Anthropic Skills](https://github.com/anthropics/skills),
+[NVIDIA Skills](https://github.com/NVIDIA/skills),
+[Block Agent Skills](https://github.com/block/agent-skills), and
+[VoltAgent Awesome Agent Skills](https://github.com/VoltAgent/awesome-agent-skills).
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).

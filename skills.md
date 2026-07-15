@@ -1,13 +1,14 @@
 # Skills
 
-This repository publishes one Codex skill:
+| Skill | Purpose | Languages |
+| --- | --- | --- |
+| [labview-to-python-industrial](skills/labview-to-python-industrial/SKILL.md) | Evidence-gated LabVIEW migration, UI, hardware, simulator, performance, and EXE workflow | English canonical; [简体中文](skills/labview-to-python-industrial/references/i18n/zh-CN.md); [日本語](skills/labview-to-python-industrial/references/i18n/ja-JP.md) |
 
-- [labview-to-python-industrial](skill/labview-to-python-industrial/SKILL.md)
+Install with:
 
-Install it by copying the skill folder into your Codex skills directory:
-
-```powershell
-Copy-Item -Recurse -Force .\skill\labview-to-python-industrial $env:USERPROFILE\.codex\skills\
+```bash
+npx skills add k-telux/labview-to-python-industrial-skill \
+  --skill labview-to-python-industrial
 ```
 
 Author: telux
